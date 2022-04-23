@@ -38,7 +38,16 @@ exports.userRegister = async (req,res) =>{
             token:crypto.randomBytes(32).toString("hex")
         }).save()
         const message = `http://localhost:${process.env.PORT}/user/verify/${newUser._id}/${verification.token}`
-        await sendEmail(newUser.email,"Confirm your account",`<h1>Confirm it</h1> ${message}`)
+        await sendEmail(newUser.email,"Confirm your account",`
+
+    <div>Thanks for signing up with Heroku! You must follow this link within 30 days of registration to activate your account:
+    </div>
+    ${message}
+
+    Have fun, and don't hesitate to contact us with your feedback.
+
+        
+       `)
 
     res.status(202).json({msg:"user resgistred successfully",token: `Bearer ${token}`})
     } catch (error) {
@@ -55,7 +64,16 @@ try {
     const isMatch = await bcrypt.compare(password,user.password)
     
     if(!isMatch) return res.status(401).json({msg:'Bad credentials'}) 
-
+    if(!user.verified) {
+         let verification = await Token.findOne({userId:user._id})
+         if(!verification){
+            const verification = await new Token({
+                userId:newUser._id,
+                token:crypto.randomBytes(32).toString("hex")
+            }).save()
+         }
+         return res.status(400).send({msg:'email sent to your adress'})
+    }
     const payload = {
         id:user._id,
         firstName:user.firstName,

@@ -18,10 +18,13 @@ Router.get('/verify/:id/:token',async(req,res)=>{
 
         if(!verification) return res.status(400).send("invalid link")
         await User.updateOne({_id:user._id,verified:true})
-        await Token.findByIdAndRemove(req.params.token)
-        res.send("email verified")
+
+        await Token.findByIdAndDelete(verification._id)
+
+        res.status(200).send("email verified")
+
     } catch (error) {
-        res.status(400).send("error")
+        res.status(400).send(error)
     }
 })
 

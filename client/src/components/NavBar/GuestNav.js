@@ -10,10 +10,10 @@ const GuestNav = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <ButtonGroup className="ms-auto" aria-label="Basic example">
             <Link className="mr-auto" to="/signin">
-              <Button>Sign Up</Button>
+              <Button>Sign in</Button>
             </Link>
             <Link to="/signup">
-              <Button>Sign In</Button>
+              <Button>Sign Up</Button>
             </Link>
           </ButtonGroup>
         </Navbar.Collapse>

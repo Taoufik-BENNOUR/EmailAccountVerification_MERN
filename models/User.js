@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     products:[
         {
         type:mongoose.Schema.Types.ObjectId,
-        ref:"Products"
+        ref:"Product"
         }
     ],
     verified:false
