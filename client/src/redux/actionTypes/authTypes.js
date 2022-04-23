@@ -10,5 +10,10 @@ export const GET_AUTH_USER = "GET_AUTH_USER"
 export const GET_AUTH_USER_SUCCESS = "GET_AUTH_USER_SUCCESS"
 export const GET_AUTH_USER_FAILED = "GET_AUTH_USER_FAILED"
 
+export const GET_URL = "GET_URL"
+export const GET_URL_SUCCESS = "GET_URL_SUCCESS"
+export const GET_URL_FAILED = "GET_URL_FAILED"
+
+
 export const LOG_OUT = "LOG_OUT";
 

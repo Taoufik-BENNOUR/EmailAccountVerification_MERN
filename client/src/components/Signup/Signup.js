@@ -11,7 +11,7 @@ const Signup = () => {
   const [password, setpassword] = useState("");
   const isAuth = useSelector((state) => state.authReducer.isAuth);
 
-  const msg = useSelector((state) => state.authReducer.msg);
+  const msg = useSelector((state) => state.authReducer.msg.msg);
   const errors = useSelector((state) => state.authReducer.errors);
   const navigate = useNavigate();
 
@@ -63,6 +63,7 @@ const Signup = () => {
                   value={password}
                 />
               </div>
+              <h6>{msg}</h6>
               <span className="remember">
                 {" "}
                 <a href="#">Forgot Password?</a>{" "}
@@ -79,13 +80,13 @@ const Signup = () => {
             </h2>
 
             <div className="social-media">
-              <a href="#">
+              <a href="/">
                 <div className="icons8-google social-mediaImg"></div>
               </a>
-              <a href="#">
+              <a href="/">
                 <div className="icons8-facebook-circled social-mediaImg"></div>
               </a>
-              <a href="#">
+              <a href="/">
                 <div className="icons8-twitter social-mediaImg"></div>
               </a>
             </div>

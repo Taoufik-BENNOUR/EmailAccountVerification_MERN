@@ -1,5 +1,6 @@
-import { GET_AUTH_USER, GET_AUTH_USER_FAILED, GET_AUTH_USER_SUCCESS, LOG_OUT, SIGN_IN, SIGN_IN_FAILED, SIGN_IN_SUCCESS, SIGN_UP, SIGN_UP_FAILED, SIGN_UP_SUCCESS } from "../actionTypes/authTypes"
+import { GET_AUTH_USER, GET_AUTH_USER_FAILED, GET_AUTH_USER_SUCCESS, GET_URL, GET_URL_FAILED, GET_URL_SUCCESS, LOG_OUT, SIGN_IN, SIGN_IN_FAILED, SIGN_IN_SUCCESS, SIGN_UP, SIGN_UP_FAILED, SIGN_UP_SUCCESS } from "../actionTypes/authTypes"
 import axios from "axios"
+
 
 export const signup =  (newUser) => async (dispatch)=> {
     dispatch({type:SIGN_UP})
@@ -46,6 +47,16 @@ export const getAuthUser = () => async (dispatch) =>{
     } catch (error) {
         dispatch({type:GET_AUTH_USER_FAILED,payload:error.response.data})         
 
+    }
+}
+export const getUrl =(id,token)=>async (dispatch)=>{
+dispatch({type:GET_URL})
+    try {
+        const response = await axios.get(`/user/verify/${id}/${token}`)
+
+        dispatch({type:GET_URL_SUCCESS,payload:response.data})
+    } catch (error) {
+        dispatch({type:GET_URL_FAILED,payload:error.response.data})
     }
 }
 

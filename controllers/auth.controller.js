@@ -12,7 +12,7 @@ exports.userRegister = async (req,res) =>{
     try {
         const user = await User.findOne({email}) //email : email
         if(user) return res.status(402).json({msg:'User already exist'}) 
-
+       
          const payload = {
       id: newUser._id,
       firstName: newUser.firstName,
@@ -37,19 +37,22 @@ exports.userRegister = async (req,res) =>{
             userId:newUser._id,
             token:crypto.randomBytes(32).toString("hex")
         }).save()
-        const message = `http://localhost:${process.env.PORT}/user/verify/${newUser._id}/${verification.token}`
+        const message = `http://localhost:${process.env.BASE_URL}/user/${newUser._id}/verify/${verification.token}`
         await sendEmail(newUser.email,"Confirm your account",`
 
     <div>Thanks for signing up with Heroku! You must follow this link within 30 days of registration to activate your account:
     </div>
     ${message}
 
-    Have fun, and don't hesitate to contact us with your feedback.
-
-        
+    
        `)
+       if(!newUser.verified) {
+        return res.status(400).send({msg:'Please confirm your email'})
 
-    res.status(202).json({msg:"user resgistred successfully",token: `Bearer ${token}`})
+   }
+     
+   res.status(202).json({msg:"user resgistred successfully",token: `Bearer ${token}`})
+
     } catch (error) {
         res.status(401).json({msg:'cant register',error:error})
     }
@@ -68,9 +71,11 @@ try {
          let verification = await Token.findOne({userId:user._id})
          if(!verification){
             const verification = await new Token({
-                userId:newUser._id,
+                userId:user._id,
                 token:crypto.randomBytes(32).toString("hex")
             }).save()
+            const message = `http://localhost:${process.env.BASE_URL}/user/${user._id}/verify/${verification.token}`
+        await sendEmail(user.email,"Confirm your account",message)
          }
          return res.status(400).send({msg:'email sent to your adress'})
     }
@@ -89,4 +94,22 @@ try {
 res.status(403).json({error:error})
 }
 
+}
+
+exports.userVerification = async (req,res) =>{
+       try {
+            const user= await User.findOne({_id:req.params.id})
+            if(!user) return res.status(400).json({errors: [{ msg: "Invalid Link" }]})
+            const verification = await Token.findOne({userId:user._id,token:req.params.token})
+    
+            if(!verification) return res.status(400).json({errors: [{ msg: "Invalid Link" }]})
+            await User.updateOne({_id:user._id,verified:true})
+    
+            await Token.findByIdAndDelete(verification._id)
+    
+            res.status(200).json({msg:"Email verified"})
+    
+        } catch (error) {
+            res.status(400).json(error)
+        }
 }

@@ -13,6 +13,7 @@ import MyProducts from './components/ProductCard/MyProducts';
 import Profile from './components/Profile/Profile';
 import PrivateRoute from './components/PrivateRouter/PrivateRoute';
 import UserNav from './components/NavBar/UserNav';
+import EmailVerify from './components/EmailVerify/EmailVerify';
 
 function App() {
   const isAuth = useSelector(state=>state.authReducer.isAuth)
@@ -39,6 +40,7 @@ function App() {
         />
         <Route path='/productslist' element={ <PrivateRoute><ProductList /> </PrivateRoute> } />
         <Route path='/profile' element={ <PrivateRoute><Profile /> </PrivateRoute> } />
+          <Route path='/user/:id/verify/:token' element={<EmailVerify/> }/>
   </Routes>
     </>
   );
