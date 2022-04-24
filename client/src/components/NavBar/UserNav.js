@@ -10,12 +10,12 @@ import {
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/actions/authActions";
-
+import "./header.css"
 const UserNav = () => {
   const dispatch = useDispatch();
   return (
     <>
-      <Navbar bg="primary" expand="lg">
+      <Navbar className="navbar"  expand="lg">
         <Container>
           <Navbar.Brand href="#home">Email Validation</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

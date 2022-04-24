@@ -14,6 +14,8 @@ import Profile from './components/Profile/Profile';
 import PrivateRoute from './components/PrivateRouter/PrivateRoute';
 import UserNav from './components/NavBar/UserNav';
 import EmailVerify from './components/EmailVerify/EmailVerify';
+import StyleTest from './components/StyleTest';
+import ForgotPassword from './components/ForgotPassword/ForgotPassword';
 
 function App() {
   const isAuth = useSelector(state=>state.authReducer.isAuth)
@@ -24,7 +26,7 @@ function App() {
   }, [isAuth,dispatch])
   
   return (
-    <>
+    <div className='app'>
       
 {isAuth?  <UserNav /> : <GuestNav />}  
 <Routes>
@@ -41,8 +43,12 @@ function App() {
         <Route path='/productslist' element={ <PrivateRoute><ProductList /> </PrivateRoute> } />
         <Route path='/profile' element={ <PrivateRoute><Profile /> </PrivateRoute> } />
           <Route path='/user/:id/verify/:token' element={<EmailVerify/> }/>
+          <Route path='/forgotpassword' element={<ForgotPassword  />} />
+          <Route path='/sendmail' element={<ForgotPassword mail={true} />} />
+
+          <Route path='/test' element={<StyleTest />} />
   </Routes>
-    </>
+    </div>
   );
 }
 

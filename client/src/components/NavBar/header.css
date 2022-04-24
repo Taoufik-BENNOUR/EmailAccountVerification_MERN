@@ -1,0 +1,14 @@
+.navbar{
+    background-color: rgba(6, 67, 93) !important;
+}
+.navbar-brand{
+    color: wheat !important;
+}
+.navbar-toggler,.navbar-toggler{
+    border-color: wheat !important;
+    background-color: #1f9ab3 !important;
+}
+.sign-button{
+    background-color: #1f9ab3 !important;
+
+}

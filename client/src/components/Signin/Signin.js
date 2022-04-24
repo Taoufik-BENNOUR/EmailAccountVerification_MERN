@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { signin } from "../../redux/actions/authActions";
 import "../Signup/signup.css";
 const Signin = () => {
@@ -26,7 +26,6 @@ const Signin = () => {
   };
   return (
     <>
-      <h1> Signin</h1>
 
       <form>
         <div class="container">
@@ -57,10 +56,8 @@ const Signin = () => {
                 />
               </div>
               <span class="remember">
-                {" "}
-                <a href="#">Forgot Password?</a>{" "}
+                <Link to="/forgotpassword">Forgot Password?</Link>{" "}
               </span>
-
               <div class="item submit">
                 {" "}
                 <button style={{ color: "white" }} onClick={(e) => login(e)}>
@@ -84,7 +81,7 @@ const Signin = () => {
               </a>
             </div>
             <span class="ac">
-              Don't have an Account? <a href="/signup">Sign Up</a>
+              Don't have an Account? <Link to="/signup">Sign Up</Link>
             </span>
           </div>
         </div>

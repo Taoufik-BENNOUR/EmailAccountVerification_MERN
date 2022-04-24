@@ -5,7 +5,11 @@
     display: flex;
     justify-content: center;
     font-family: Arial, Helvetica, sans-serif;
-    align-items: center;
+    align-items: center;    
+
+}
+.sign-container{
+    min-height: 100vh;
 
 }
 
@@ -14,7 +18,7 @@
     margin: 2em;
     width: max-content;
     height: max-content;
-    background-color: rgb(128, 156, 255);
+    background-color: rgba(6, 67, 93,0.9);
     border-radius: 30px;
 }
 
@@ -22,6 +26,7 @@
     text-align: center;
     font-size: 2em;
     margin-top: -2%;
+    color: white;
 }
 
 .item {
@@ -43,7 +48,7 @@ button {
     border-radius: 4.7em;
     border: none;
     width: 100%;
-    background-color: rgb(88, 120, 235);
+    background-color: #1f9ab3;
     font-size: 18px;
 }
 
@@ -68,18 +73,24 @@ form {
     margin: 5px;
 }
 
-.remember {
+.remember  {
     font-size: normal;
     margin-left: 40%;
     display: inline-block;
     margin-top: 17px;
 }
+.remember a {
+    color: white;
+}
 
-.ac {
+.ac ,.ac a {
     display: inline-block;
     font-size: medium;
     margin-top: 24px;
     text-align: center;
+    color: white !important;
+    text-decoration: none;
+
 }
 
 
@@ -117,8 +128,10 @@ form {
 }
 
 .container h2 span {
-    background-color: rgb(128, 156, 255);
+    background-color: rgba(6, 67, 93);
         padding: 0 10px;
+        color: wheat;
+        border-radius: 15px;
 }
 
 .social-mediaImg {
@@ -178,6 +191,7 @@ form {
 
     .ac {
         font-size: small;
+        color: white !important;
     }
 
     #toc {

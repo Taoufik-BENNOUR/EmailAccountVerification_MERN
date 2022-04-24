@@ -17,8 +17,8 @@ const EmailVerify = () => {
   }, [])
   
   return  (
-    <>
- {er === false?   <Card className='container' style={{ width: '18rem' }}>
+    <div className='all'>
+ {er === false?   <Card className='card-container' style={{ width: '18rem' }}>
   <Card.Img variant="top" src="https://saoanh.com/themes/saoanh/images/success-icon-10.png" />
   <Card.Body>
     <Card.Title>Email verified</Card.Title>
@@ -28,7 +28,7 @@ const EmailVerify = () => {
    </Link>  </Card.Body>
 </Card>: <h1>{error && error.map(er=>er.msg)}</h1>}
 
-    </>
+    </div>
   )
 }
 

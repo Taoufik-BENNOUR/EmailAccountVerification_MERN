@@ -1,6 +1,14 @@
+.all{
+    min-height: 100vh;
+}
 
 .card{
+    margin: 50px auto;
     border: none !important; 
-    margin-top:  70px;
+    background-color: rgba(0, 0, 0,0.2) !important;
+    color: aqua !important;
 
+}
+.card-title{
+    color: aliceblue;
 }
