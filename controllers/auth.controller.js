@@ -113,3 +113,58 @@ exports.userVerification = async (req,res) =>{
             res.status(400).json(error)
         }
 }
+exports.newpasswordToken = async(req,res)=>{
+
+    try {
+        let user = await User.findOne({email:req.body.email})
+        if(!user) return res.status(404).json({msg:"Email doesnt exist"})
+        let token = await Token.findOne({userId:user._id})
+        if(!token){
+             token = await new Token({
+                userId:user._id,
+                token:crypto.randomBytes(32).toString("hex")
+            }).save()
+        }
+        const url = `http://localhost:${process.env.BASE_URL}/user/passwordreset/${user._id}/${token.token}`
+        await sendEmail(user.email,"Password Reset",url)
+        res.status(200).json({msg:"Password reset link sent to your email account"})
+
+    } catch (error) {
+        res.status(400).json({error:error})
+    }
+}
+
+
+exports.passwordTokenVerification = async(req,res)=>{
+
+    try {
+        let user = await User.findOne({_id:req.params.id})
+        if(!user) return res.status(404).json({msg:"invalid link"})
+        let token = await Token.findOne({userId:user._id,token:req.params.token})
+        if(!token) return res.status(400).json({msg:" no token"})
+        res.status(200).json({msg:"Valid URL"})
+
+    } catch (error) {
+        res.status(400).json({error:error})
+    }
+}
+exports.resetPassword = async(req,res)=>{
+try {
+
+    let user = await User.findOne({_id:req.params.id})
+        if(!user) return res.status(404).json({msg:"invalid link"})
+        let token = await Token.findOne({userId:user._id,token:req.params.token})
+        if(!token) return res.status(400).json({msg:" Invalid token"})
+        // if(!user.verified) user.verified = true;
+        const salt = await bcrypt.genSalt(10)
+// Hashed password
+        const hash = await bcrypt.hash(req.body.password,salt);
+     user.password = hash;
+    user.save()
+    //   await token.remove()
+     res.status(200).json({msg:"password reset successfully"})
+} catch (error) {
+    res.status(400).json({error:error})
+}
+
+}

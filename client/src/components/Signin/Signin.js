@@ -28,7 +28,7 @@ const Signin = () => {
     <>
 
       <form>
-        <div class="container">
+        <div class="sign-container container">
           <div class="container-wrapper">
             <h3 class="login-text">
               <i class="bi bi-person-circle ac-logo"></i>Login
@@ -56,7 +56,7 @@ const Signin = () => {
                 />
               </div>
               <span class="remember">
-                <Link to="/forgotpassword">Forgot Password?</Link>{" "}
+                <Link to="/sendmail">Forgot Password?</Link>{" "}
               </span>
               <div class="item submit">
                 {" "}

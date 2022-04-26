@@ -4,7 +4,7 @@ const connectDB = require('./config/connectDB');
 const user = require("./routes/user");
 const auth = require('./routes/auth')
 const product = require('./routes/products')
-///local middleware
+const User = require('./models/User')
 
 const logger = (req,res,next)=>{
     true ? next() : res.send('blocked')
@@ -13,6 +13,7 @@ const app = express()
 connectDB()
 app.use(express.json())
 app.use(logger)
+
 
 //Create end point
 app.use('/user',auth)

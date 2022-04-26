@@ -6,7 +6,7 @@ const Home = () => {
 
   
     return (
-    <div>
+    <div style={{color:"white",fontSize:"large"}} className='sign-container container'>
    Home PAGE
     </div>
   )

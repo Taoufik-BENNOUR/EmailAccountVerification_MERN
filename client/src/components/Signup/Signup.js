@@ -37,7 +37,7 @@ const Signup = () => {
     <>
 
       <form>
-        <div className="container">
+        <div className="sign-container container">
           <div className="container-wrapper">
             <h3 className="login-text">
               <i className="bi bi-person-circle ac-logo"></i>Sign Up
@@ -63,7 +63,7 @@ const Signup = () => {
                 />
               </div>
               <span className="remember">
-                <Link to={"/forget"}>Forgot Password?</Link>{" "}
+                <Link to={"/sendmail"}>Forgot Password?</Link>{" "}
               </span>
 
               <div className="item submit">

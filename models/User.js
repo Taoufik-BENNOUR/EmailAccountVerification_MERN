@@ -12,7 +12,12 @@ const userSchema = new mongoose.Schema({
         ref:"Product"
         }
     ],
-    verified:false
+    verified:false,
+    createdAt:{
+        type:Date,
+        default:Date.now(),
+
+    }
 })
 
 module.exports = mongoose.model('User',userSchema)

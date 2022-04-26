@@ -1,4 +1,4 @@
-import { GET_AUTH_USER, GET_AUTH_USER_FAILED, GET_AUTH_USER_SUCCESS, GET_URL, GET_URL_FAILED, GET_URL_SUCCESS, LOG_OUT, SIGN_IN, SIGN_IN_FAILED, SIGN_IN_SUCCESS, SIGN_UP, SIGN_UP_FAILED, SIGN_UP_SUCCESS } from "../actionTypes/authTypes"
+import { CHANGE_PASSWORD, CHANGE_PASSWORD_FAILED, CHANGE_PASSWORD_SUCCESS, FORGOT_PASSWORD, FORGOT_PASSWORD_FAILED, FORGOT_PASSWORD_SUCCESS, GET_AUTH_USER, GET_AUTH_USER_FAILED, GET_AUTH_USER_SUCCESS, GET_URL, GET_URL_FAILED, GET_URL_SUCCESS, LOG_OUT, RESET_PASSWORD, RESET_PASSWORD_FAILED, RESET_PASSWORD_SUCCESS, SIGN_IN, SIGN_IN_FAILED, SIGN_IN_SUCCESS, SIGN_UP, SIGN_UP_FAILED, SIGN_UP_SUCCESS } from "../actionTypes/authTypes"
 import axios from "axios"
 
 
@@ -59,6 +59,38 @@ dispatch({type:GET_URL})
         dispatch({type:GET_URL_FAILED,payload:error.response.data})
     }
 }
+export const resetPassword = (id,token) =>async(dispatch)=>{
+    dispatch({type:RESET_PASSWORD})
+    try {
+       const response = await axios.get(`/user/passwordTokenVerification/${id}/${token}`) 
+       dispatch({type:RESET_PASSWORD_SUCCESS,payload:response.data})
+    } catch (error) {
+        dispatch({type:RESET_PASSWORD_FAILED,payload:error.response.data})
+        
+    }
+}
+
+export const forgotPassword = (sendmail) =>async(dispatch)=>{
+    dispatch({type:FORGOT_PASSWORD})
+    try {
+       const response = await axios.post(`/user/forgotpassword`,sendmail) 
+       dispatch({type:FORGOT_PASSWORD_SUCCESS,payload:response.data})
+    } catch (error) {
+        dispatch({type:FORGOT_PASSWORD_FAILED,payload:error.response.data})
+        
+    }
+}
+export const changePassword = (id,token,newPass) =>async(dispatch)=>{
+    dispatch({type:CHANGE_PASSWORD})
+    try {
+       const response = await axios.post(`/user/changepassword/${id}/${token}`,newPass) 
+       dispatch({type:CHANGE_PASSWORD_SUCCESS,payload:response.data})
+    } catch (error) {
+        dispatch({type:CHANGE_PASSWORD_FAILED,payload:error.response.data})
+        
+    }
+}
+
 
 export const logout = ()=>async (dispatch) => {
   

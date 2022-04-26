@@ -1,18 +1,20 @@
 const express = require('express');
-const { userRegister, userLogin, userVerification } = require('../controllers/auth.controller');
+const { userRegister, userLogin, userVerification, newpasswordToken, passwordTokenVerification, resetPassword } = require('../controllers/auth.controller');
 const isAuth = require('../middlewares/passport-setup');
-const Token = require('../models/Token');
-const User = require('../models/User');
+
 
 const Router = express.Router();
 
 //DELETE "http://localhost:9000/user/register"
 
 Router.post('/register',userRegister)
+Router.post('/login',userLogin)
 
 Router.get('/verify/:id/:token',userVerification)
 
-Router.post('/login',userLogin)
+Router.post('/forgotpassword',newpasswordToken)
+Router.get('/passwordTokenVerification/:id/:token',passwordTokenVerification)
+Router.post('/changepassword/:id/:token',resetPassword)
 
 // GET CurrentUser 
 Router.get('/currentUser',isAuth(),(req,res)=>{

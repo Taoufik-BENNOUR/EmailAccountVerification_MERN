@@ -1,58 +1,54 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Card } from 'react-bootstrap'
-import { Link, useParams } from 'react-router-dom'
+import React, { useState } from 'react'
+import { useDispatch } from 'react-redux';
+import { forgotPassword } from '../../redux/actions/authActions';
 import '../Signup/signup.css'
-const ForgotPassword = ({mail}) => {
-  
-  
-  return  (
+const ResetPassword = () => {
+    const [email, setemail] = useState("")
+    const dispatch = useDispatch()
+    const sendemail = (e) => {
+        e.preventDefault();
+        const sendmail = {
+          email,   
+        };
+    
+        dispatch(forgotPassword(sendmail));
+        setemail("");
+      };
+  return (
     <div>
-        <form>
+        
+
+
+
+                <form>
         <div className="sign-container container">
           <div className="container-wrapper">
             <h3 className="login-text">
-              <i className="bi bi-person-circle ac-logo"></i>{mail?"Reset password":"Set Password"}
+              <i className="bi bi-person-circle ac-logo"></i>Reset password
             </h3>
-             {mail?  <div className="item">
-                <input
+            <div className="item">
+        <input
                   className="input"
                   type="email"
                   placeholder="Email adress"
-                //   onChange={(e) => setemail(e.target.value)}
-                //   value={}
+                  onChange={(e) => setemail(e.target.value)}
+                  value={email}
                 />  
-             </div>: (<div>
-             
-             <div className="item">
-                <input
-                  className="input"
-                  type="password"
-                  placeholder="New password"
-                //   onChange={(e) => setemail(e.target.value)}
-                //   value={}
-                />  
-             </div>
-             <div className="item">
-                <input
-                  className="input"
-                  type="password"
-                  placeholder="Confirm new password"
-                //   onChange={(e) => setemail(e.target.value)}
-                //   value={}
-                />  
-             </div> </div>)}
+                
+             </div> 
              <div className="item submit">
-                <button style={{ color: "white" }} >
-                  {mail ? "Send Mail" : "Reset password"}
+             <button onClick={(e)=>sendemail(e)} style={{ color: "white" }} >
+                  Send email
                 </button>
               </div>
               
-             </div>
-             </div>
-
+             
+            </div>
+         
+        </div>
       </form>
     </div>
   )
 }
 
-export default ForgotPassword
+export default ResetPassword
